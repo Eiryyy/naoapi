@@ -15,9 +15,13 @@ router.get('/nao', function(req, res) {
   }, function (err, data) {
     if (err) return res.send(err);
     var d = _.sample(data.Items);
+    var bucket = d.bucket.S;
+    var key = d.key.S;
+    var url = 'https://s3.amazonaws.com/' + bucket + '/' + key;
     res.json( {
-      bucket: d.bucket.S,
-      key: d.key.S
+      bucket: bucket,
+      key: key,
+      url: url
     } );
   } );
 } );
